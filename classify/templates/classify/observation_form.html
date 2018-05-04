@@ -1,0 +1,91 @@
+{% extends 'classify/layout.html' %}
+{% block body %}
+
+<script type="text/javascript">
+function validate_form() {
+    var species = document.forms["Form"]["species"].value;
+    var count = document.forms["Form"]["count"].value;
+    var females = document.forms["Form"]["females"].value;
+    var males = document.forms["Form"]["males"].value;
+    var young = document.forms["Form"]["young"].value;
+    if (species==null || species=="",
+        count==null || count=="",
+        females==null || females=="",
+        males==null || males=="",
+        young==null || young=="") {
+            alert("Please fill in required fields");
+            return false;
+        }
+    
+}
+</script>
+
+<div class="panel panel-primary">
+    <div class="panel-heading"><h3 class="panel-title">Edit Observation</h3></div>
+    <div class="panel-body">
+        <form action="" method="post" id="observation_form" name="Form" onsubmit="return validate_form()">
+            {% csrf_token %}
+            <p>{{ object.image.image_tag }}</p>
+            
+            <label for="date" class="col-lg-2 control-label">Date:</label>
+            <p>{{ object.image.date }}</p>
+            
+            {% if object.site %}
+                <label for="site" class="col-lg-2 control-label">Site:</label>
+                <p>{{ object.site }}<p>
+            {% endif %}
+            
+            <div class="form-group">
+                <label for="species" class="col-lg-2 control-label">Species:</label>
+                <input type="text" id="species" name="species" value={{ object.species }}>
+            </div>
+            
+            <div class="form-group">
+                <label for="count" class="col-lg-2 control-label">Count:</label>
+                <input type="text" id="count" name="count" value={{ object.count }}>
+            </div>
+            
+            <div class="form-group">
+                <label for="females" class="col-lg-2 control-label">Females:</label>
+                <input type="text" id="females" name="females" value={{ object.females }}>
+            </div>
+            
+            <div class="form-group">
+                <label for="males" class="col-lg-2 control-label">Males:</label>
+                <input type="text" id="males" name="males" value={{ object.males }}>
+            </div>
+            
+            <div class="form-group">
+                <label for="young" class="col-lg-2 control-label">Young:</label>
+                <input type="text" id="young" name="young" value={{ object.young }}>
+            </div>
+            
+            <div class="form-group">
+                <label for="unknown" class="col-lg-2 control-label">Unknown:</label>
+                <input type="text" id="unknown" name="unknown" value={{ object.unknown }}>
+            </div>
+            
+            <!--<p> observer: {{ object.person }}</p>-->
+            {% if todo %}
+
+                <!-- Button (Triple) -->
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="save">Save/Cancel/Navigate</label>
+                  <div class="col-md-8">
+                    <button id="cancel" name="cancel" class="btn btn-default"><a href="{% url 'classify:image_observations' object.image.id %}">Cancel</a></button>
+                    <button id="prev" name="prev" class="btn btn-info">Prev</button>
+                    <button id="save" name="save" class="btn btn-primary">Save</button>
+                    <button id="next" name="next" class="btn btn-info">Next</button>
+                  </div>
+                </div>
+            
+            {% else %}
+                <div class="form-group">
+                    <button name="cancel" class="btn btn-default"><a href="{% url 'classify:image_observations' object.image.id %}">Cancel</a></button>
+                    <button type="submit" name="submit" class="btn btn-primary">Save</button>
+                </div>
+            {% endif %}
+        </form>
+    </div>
+</div>
+{% endblock %}

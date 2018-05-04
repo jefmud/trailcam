@@ -1,0 +1,26 @@
+{% extends 'classify/layout.html' %}
+{% block body %}
+<h1>Sites</h1>
+  <div class="bs-component">
+    <table class="table table-striped table-hover ">
+      <thead>
+        <tr>
+          <th>Site Name</th>
+          <th>Detail</th>
+          <th>Images</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for site in object_list %}
+          <tr>
+            <td>{{site.name}}</td>
+            <td><a href="{% url 'classify:site_detail_view' site.id %}">detail</a></td>
+            <td><a href="{% url 'classify:site_images' site.id %}">images</a></td>
+          </tr>
+        {% empty %}
+            <tr>No sites yet.</tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

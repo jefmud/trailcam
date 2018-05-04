@@ -1,0 +1,25 @@
+{% extends 'classify/layout.html' %}
+{% block body %}
+<div class="panel panel-primary">
+    <div class="panel-heading"><h3 class="panel-title">Observation Data</h3></div>
+    <div class="panel-body">
+        <p> {{ object.image.image_tag }} </p>
+        <p>{{ object }}</p>
+        <table class="table table-striped">
+            <tr><td>Observer:</td><td>{{ object.person }}</td></tr>
+            <tr><td>Site:</td><td>{{ object.site }}</td></tr>
+            <tr><td>Date:</td><td>{{ object.date_str}}</td></tr>
+            <tr><td>Species:</td><td>{{ object.species }}</td></tr>
+            <tr><td>Count:</td><td>{{ object.count }}</td></tr>
+            <tr><td>Females:</td><td>{{ object.females }}</td></tr>
+            <tr><td>Males:</td><td>{{ object.males }}</td></tr>
+            <tr><td>Young:</td><td>{{ object.young }}</td></tr>
+            <tr><td>Unknown:</td><td>{{ object.unknown }}</td></tr>
+        </table>
+        <a class="btn btn-default" href="{% url 'classify:image_observations' object.image.id %}">Back</a>
+        {% if can_edit %}
+        <a class="btn btn-warning" href="{% url 'classify:observation_edit' object.id %}">Edit</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'classify/layout.html' %}
+{% block body %}
+    <div class="panel panel-primary">
+        <div class="panel-heading"><h3 class="panel-title">Image Detail</h3></div>
+        <div class="panel-body">
+            <p>{{ image.image_tag }}</p>
+            <div class="alert alert-success">{{ image }}</div>
+            {% if observations %}
+                <div>
+                    <table class="table table-striped">
+                    <thead><tr><th>Observation</th></thead>
+                        {% for obs in observations %}
+                            <tr><td><a href="{% url 'classify:observation_detail_view' obs.id %}">{{ obs }}</a></tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% else %}
+                <p>No observations have been made on this image.</p>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <button><a href="{% url 'classify:image_observation_form' image.id %}">Make Observation</a></button>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

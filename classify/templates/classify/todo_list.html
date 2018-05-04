@@ -1,0 +1,22 @@
+{% extends 'classify/layout.html' %}
+{% block body %}
+<h2>Todo List for {{username}}</h2>
+    <table class='table table-striped'>
+        <thead>
+            <th>Image</th>
+            <th>User</th>
+            <th>Done</th>
+        </thead>
+        {% for todo in todo_list %}
+            {% if todo.done %}
+            <tr class="success">
+            {% else %}
+            <tr>
+            {% endif %}
+                <td><a href="{% url 'classify:image_observations' todo.image.id %}">{{todo.image}}</a></td>
+                <td>{{todo.user}}</td>
+                <td>{{todo.done}}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

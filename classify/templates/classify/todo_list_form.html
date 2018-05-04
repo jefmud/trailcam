@@ -1,0 +1,117 @@
+{% extends 'classify/layout.html' %}
+{% block body %}
+
+<script type="text/javascript">
+function validate_form() {
+    var count = document.forms["Form"]["count_input"].value;
+    if (count==null || count=="") {
+            alert("Please fill in Number to add field with an integer value.");
+            return false;
+        }
+    
+}
+</script>
+
+<form method="post" name="Form">
+{% csrf_token %}
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Todo List Builder</legend>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="username">Select User</label>
+  <div class="col-md-4">
+    <select id="site" name="username" class="form-control">
+      <option value="{{request.user.username}}">{{request.user.username}}</option>
+      {% for u in usernames %}
+        <option value="{{u}}">{{u}}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Number to add</label>  
+  <div class="col-md-4">
+  <input id="textinput" name="count_input" type="text" placeholder="number of tasks to add" class="form-control input-md">
+  <span class="help-block">number of tasks to add</span>  
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="site">Select Site</label>
+  <div class="col-md-4">
+    <select id="site" name="site_input" class="form-control">
+      <option value="0">any</option>
+      <option value="1">PM1</option>
+      <option value="2">PM2</option>
+      <option value="3">PM3</option>
+      <option value="4">PM4</option>
+      <option value="5">PM5</option>
+      <option value="6">PM6</option>
+      <option value="7">PM7</option>
+      <option value="8">PM8</option>
+      <option value="9">PM9</option>
+      <option value="10">PM10</option>
+      <option value="11">PM11</option>
+      <option value="12">PM12</option>
+      <option value="13">PM13</option>
+      <option value="14">PM14</option>
+      <option value="15">PM15</option>
+      <option value="16">PM16</option>
+      <option value="17">PM17</option>
+      <option value="18">PM18</option>
+      <option value="19">PM19</option>
+      <option value="20">PM20</option>
+      <option value="21">PM21</option>
+      <option value="22">PM22</option>
+      <option value="23">WF1</option>
+      <option value="24">WF2</option>
+    </select>
+  </div>
+</div>
+
+<!-- Multiple Checkboxes -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="checkboxes">Task selection</label>
+  <div class="col-md-4">
+    <div class="checkbox">
+      <label for="checkboxes-1">
+        <input type="checkbox" name="checkbox1" id="checkboxes-1" value="r">
+        Random selection
+      </label>
+    </div>
+    <div class="checkbox">
+      <label for="checkboxes-2">
+        <input type="checkbox" name="checkbox2" id="checkboxes-2" value="u">
+        Unclassified only
+      </label>
+    </div>
+    <div class="checkbox">
+      <label for="checkboxes-3">
+        <input type="checkbox" name="checkbox3" id="checkboxes-3" value="t" checked>
+        Not in existing ToDo lists
+      </label>
+    </div>
+  </div>
+</div>
+
+  <!-- Button (Double) -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="save">Save/Cancel</label>
+    <div class="col-md-8">
+      <button id="save" name="save" class="btn btn-primary">Save</button>
+      <button id="cancel" name="cancel" class="btn btn-warning">Cancel</button>
+    </div>
+  </div>
+
+</fieldset>
+</form>
+{{values}}
+
+{% endblock %}

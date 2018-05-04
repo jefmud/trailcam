@@ -1,0 +1,24 @@
+{% extends 'classify/layout.html' %}
+{% load classify_extras %}
+
+{% block body %}
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h3 class="panel-title">Available User Actions</h3></div>
+            <div class="panel-body">
+                {% if user.is_authenticated %}
+                    <a href='{% url "classify:todo_list" %}'>View Todo List</a><br>
+                    {% if request.user|has_group:"lead" %}
+                        <a href='{% url "classify:todo_create" %}'>Create Todo List</a><br>
+                        <a href='{% url "classify:todo_clear" %}'>Clear Todo List</a><br>
+                    {% endif %}
+                {% else %}
+                <h1>WFU Trailcam</h1>
+                <p>Podcasting operational change management inside of workflows to establish a framework. Taking seamless key performance indicators offline to maximise the long tail. Keeping your eye on the ball while performing a deep dive on the start-up mentality to derive convergence on cross-platform integration.</p>
+                <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.</p>
+                <p>Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</p>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

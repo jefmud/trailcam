@@ -1,0 +1,15 @@
+  <!-- bootstrap style messages sent via Django messaging app -->
+  <div class="container">
+    {% if messages %}
+      <div class="row">
+        <div class="col-xs-12">
+          {% for message in messages %}
+            <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                {{ message }}
+            </p>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
